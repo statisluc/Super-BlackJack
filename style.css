@@ -171,7 +171,8 @@ html {
 }
 .disclaimer {
   font-family: "Press Start 2P", cursive;
-  right: 2%;
+  position: fixed;
+  right: 20%;
   top: 50%;
 }
 #player-sum {
