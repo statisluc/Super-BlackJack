@@ -169,6 +169,11 @@ html {
 .super-blackjack-text {
   font-family: "Press Start 2P", cursive;
 }
+.disclaimer {
+  font-family: "Press Start 2P", cursive;
+  right: 2%;
+  top: 50%;
+}
 #player-sum {
   position: absolute;
   font-family: "Press Start 2P", cursive;
