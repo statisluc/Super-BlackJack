@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>SUPER BLACKJACK</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="style.css" />
+    <script src="index.js"></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <audio
+      preload="auto"
+      id="startmusic"
+      src="audio/Super_Punch_Out_OST_-_Tutorial_Theme.mp3"
+    ></audio>
+
+    <div class="health-container">
+      <div id="healthBar" class="health-bar"></div>
+    </div>
+
+    <div class="enemy-container">
+      <div id="enemyBar" class="enemy-bar"></div>
+    </div>
+
+    <div class="game-container">
+      <div class="game-content">
+        <h1 class="super-blackjack-text">Super Blackjack</h1>
+        <p id="counter"></p>
+        <div id="blackscreen" class="fade-screen"></div>
+
+        <button id="start-game" onclick="startGame()">START GAME</button>
+        <button id="move_card" onclick="moveImage()">MOVE CARD</button>
+        <button id="appear-card" onclick="appearcard()">
+          Hoccus Poccus Bitch
+        </button>
+        <button id="hit" onclick="hit()">HIT</button>
+        <button id="stay" onclick="stay()">STAY</button>
+        <h1 id="player-sum">0</h1>
+        <h1 id="enemy-sum">0</h1>
+
+        <audio
+          id="level1music"
+          src="audio/Marvel_Vs_Capcom_2_Music_-_Clock_Tower.mp3"
+        ></audio>
+
+        <div id="cards-container">
+          <img
+            id="card-back-enemy"
+            src="SBS - 2D Poker Pack\Top-Down\Cards\red_card.png"
+          />
+          <div id="drawn-cards-player"></div>
+          <div id="enemy-stack"></div>
+        </div>
+        <img
+          id="card-back"
+          src="SBS - 2D Poker Pack\Top-Down\Cards\red_card.png"
+        />
+      </div>
+    </div>
+  </body>
+</html>
