@@ -117,7 +117,7 @@ function game_in_cartridge() {
 
 
 let damage = 0;
-let playerattack = 200; //CHANGE THIS LATER
+let playerattack = 20; //CHANGE THIS LATER
 let health = 100;
 
 let enemy_health = 100;
