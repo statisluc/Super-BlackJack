@@ -162,7 +162,9 @@ function decreasePlayerHealth(damage){
 function decreaseEnemyHealth(playerattack){
   enemy_health -= playerattack;
   if(enemy_health <= 0){
+    transition_in();
     enemyDead();
+
   }
   enemyBarUpdate();
 }
@@ -217,7 +219,10 @@ function level1() {
   drawn_cards = [];
   drawnIndices = new Array(all_cards.length).fill(false); //global variable that keeps track of cards drawn from the deck, must be reset at each start of level function
   document.getElementById("stay").disabled = true;
-  transition_out();
+  //include start button sound effect
+  setTimeout(()=>{
+    transition_out();
+  },3000);
 }
 
 
@@ -226,7 +231,9 @@ function level1() {
 function level2() {
   level = 2;
   damage = 15;
-  document.body.style.backgroundColor = "blue";
+  setTimeout(()=>{
+    document.body.style.backgroundColor = "blue";
+  },3000);
   healthrefill();
   //document.getElementById("level2music").volume = 0.0; // change this later;
   setTimeout(() => {
@@ -236,14 +243,17 @@ function level2() {
   document.getElementById("stay").disabled = true;
 
   drawnIndices = new Array(all_cards.length).fill(false);
-
-  transition_out();
+  setTimeout(()=>{
+    transition_out();
+  },3000);
 }
 
 function level3(){
   level = 3;
   damage = 30;
+  setTimeout(()=>{
   document.body.style.backgroundColor = "purple";
+  },3000);
   healthrefill();
   document.getElementById("level3music");
   setTimeout(()=>{
@@ -253,8 +263,9 @@ function level3(){
   document.getElementById("stay").disabled = true;
 
   drawnIndices = new Array(all_cards.length).fill(false);
-
-  transition_out();
+  setTimeout(()=>{
+    transition_out();
+  },3000);
 }
 
 
@@ -271,11 +282,31 @@ function transition_out() {
 
   setTimeout(() => {
     black_screen.style.display = "none";
-  }, 1); //change this value later
+  }, 1000); //change this value later
 }
 
 
+// function transition_in(){
+//   const black_screen = document.getElementById("blackscreen");
+//   black_screen.style.display = "block";
+  
 
+//   setTimeout(()=>{
+//     black_screen.style.opacity = 1;   
+//   }, 1000);
+// }
+function transition_in() {
+  const black_screen = document.getElementById("blackscreen");
+  black_screen.style.display = "block";
+
+  // Use requestAnimationFrame to ensure the display change has taken effect
+  requestAnimationFrame(() => {
+    // Add another requestAnimationFrame if one frame is not enough
+    requestAnimationFrame(() => {
+      black_screen.style.opacity = 1;
+    });
+  });
+}
 
 
 
