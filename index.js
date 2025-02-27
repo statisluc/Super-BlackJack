@@ -117,7 +117,7 @@ function game_in_cartridge() {
 
 
 let damage = 0;
-let playerattack = 20;
+let playerattack = 200; //CHANGE THIS LATER
 let health = 100;
 
 let enemy_health = 100;
@@ -162,7 +162,7 @@ function decreasePlayerHealth(damage){
 function decreaseEnemyHealth(playerattack){
   enemy_health -= playerattack;
   if(enemy_health <= 0){
-    //insert function that transitions into next level
+    enemyDead();
   }
   enemyBarUpdate();
 }
@@ -202,11 +202,13 @@ function startGame() {
 }
 
 
-
+let level;
 
 
 function level1() {
+  level = 1;
   damage = 10;
+  healthrefill();
   console.log("Level 1 Starts Now...");
   document.getElementById("level1music").volume = 0.5;
   setTimeout(() => {
@@ -214,7 +216,7 @@ function level1() {
   }, 1000);
   drawn_cards = [];
   drawnIndices = new Array(all_cards.length).fill(false); //global variable that keeps track of cards drawn from the deck, must be reset at each start of level function
-
+  document.getElementById("stay").disabled = true;
   transition_out();
 }
 
@@ -222,35 +224,41 @@ function level1() {
 
 
 function level2() {
+  level = 2;
   damage = 15;
-  document.getElementById("level2music").volume = 0.0; // change this later;
+  document.body.style.backgroundColor = "blue";
+  healthrefill();
+  //document.getElementById("level2music").volume = 0.0; // change this later;
   setTimeout(() => {
     document.getElementById("level2music").play();
   }, 1000);
   drawn_cards = [];
+  document.getElementById("stay").disabled = true;
+
   drawnIndices = new Array(all_cards.length).fill(false);
 
-  transition_out;
+  transition_out();
+}
+
+function level3(){
+  level = 3;
+  damage = 30;
+  document.body.style.backgroundColor = "purple";
+  healthrefill();
+  document.getElementById("level3music");
+  setTimeout(()=>{
+    document.getElementById("level3music").play();
+  }, 1000);
+  drawn_cards = [];
+  document.getElementById("stay").disabled = true;
+
+  drawnIndices = new Array(all_cards.length).fill(false);
+
+  transition_out();
 }
 
 
 
-
-
-
-function moveImage() {
-  const card = document.getElementById("clubs02");
-  card.style.left = "500px";
-}
-
-
-
-
-
-function appearcard() {
-  const card = document.getElementById("hearts04");
-  card.style.opacity = 1;
-}
 
 
 
@@ -337,6 +345,8 @@ function hit() {
     //document.getElementById('hit').disabled = true;
     //call sudden death function here that ends the game, and rewards whichever player with the higher health
   }
+  document.getElementById("stay").disabled = false;
+
   console.log("THE SUM: " + sum);
   // setTimeout(() => {
   //   renderGame();
@@ -410,13 +420,13 @@ function enemyPlayerDraw() {
 
   if(enemy_sum <= 11){
     drawAnother = true;
-  } else if (enemy_sum >= 18 && enemy_sum <= 19 && Math.random() < 0.1) {
+  } else if (enemy_sum >= 18 && enemy_sum < 19 && Math.random() < 0.05) {
     drawAnother = true;
-  } else if (enemy_sum >= 12 && enemy_sum <= 15 && Math.random() < 0.7) {
+  } else if (enemy_sum >= 12 && enemy_sum <= 15 && Math.random() < 0.5) {
     drawAnother = true;
-  } else if (enemy_sum >= 16 && enemy_sum <= 17 && Math.random() < 0.2) {
+  } else if (enemy_sum >= 16 && enemy_sum <= 17 && Math.random() < 0.1) {
     drawAnother = true;
-  }else if(enemy_sum > 19){
+  }else if(enemy_sum >= 19){
     drawAnother = false;
   }
   console.log(drawAnother);
@@ -492,6 +502,7 @@ function renderGame() {
 
   if (sum > 21) {
     disableHitButton();
+    document.getElementById("stay").disabled = true;
     
     setTimeout(()=>{
       
@@ -500,6 +511,7 @@ function renderGame() {
         console.log("player health decreased outside function, within render")
         clearCards();
         enableHitButton();
+        document.getElementById("stay").disabled = false;
 
       
 
@@ -508,10 +520,19 @@ function renderGame() {
     }, 3000);
     
   } else if (sum < 21) {
-
+    if(!drawinghandle){
+      
+    }else if(drawinghandle){
+    disableHitButton();
+    setTimeout(()=>{
+      enableHitButton();
+      console.log("ENABLED CAUSE OF HIT BTICH SHIT");
+    }, 500);
+  }
     //might remove this line, as this can be satisfied by the stay() function
   } else if (sum === 21) { //player gets a critical attack
     disableHitButton();
+    document.getElementById("stay").disabled = true;
     setTimeout(()=>{
       playerattack += 15;
       decreaseEnemyHealth(playerattack);
@@ -521,6 +542,7 @@ function renderGame() {
       }
       clearCards();
       enableHitButton();
+      document.getElementById("stay").disabled = false;
       console.log("player critical 21");
     }, 3000);
 
@@ -569,6 +591,7 @@ function removeEnemyCards(){
   enemy_card_display.style.opacity = 0;
 }
 
+let drawinghandle; 
 
 
 function drawinghandler(){
@@ -590,6 +613,8 @@ function drawinghandler(){
 
 function stay() {
   disableHitButton();
+  document.getElementById("stay").disabled = true;
+
 
   if (enemyDone === true) {
     //enemyDone must be globally declared in the function that handles enemy logic
@@ -597,7 +622,10 @@ function stay() {
   } else {
     console.log("drawing handler now starts");
     //call renderGame, so that then that could call enemyplayerdraw, and keep it on so until it is no longer gonna select another card, and enemyDone is set to true
+    drawinghandle = true;
+    console.log("drawing handle: " + drawinghandle);
     drawinghandler();
+    drawinghandle = false;
     console.log("bitch ass handler now ends!");
     //setTimeout(stay, 100); //timeout so that it waits for enemyDone to be true (after enemy is done drawing all their cards)
   }
@@ -632,7 +660,8 @@ function stay() {
     console.log("render game handling");
   }
   enableHitButton();
-}, 6000);
+  document.getElementById("stay").disabled = false;
+}, 4000);
 }
 
 
@@ -664,7 +693,24 @@ function to_black() {
 }
 
 function game_over() {
+  //insert new html text element stating game over
+  //insert button that reloads the whole game/page
+
   //when your health bar is set to 0. this restarts the current level. 2 lives then game over
+}
+
+function enemyDead(){
+  if(level === 1){
+    clearCards();
+    //insert function to transition into black
+    level2();
+  }else if(level === 2){
+    clearCards();
+    //insert function to transition in
+    level3();
+  }else if(level === 3){
+    //insert ending game screen, then repeat the button used to reset/reload the browser
+  }
 }
 
 //window.onload = function()---- this should start the game (super blackjack intro)
