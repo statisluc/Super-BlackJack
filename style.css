@@ -181,6 +181,7 @@ html {
   position: fixed;
   right: 20%;
   top: 50%;
+  color: red;
 }
 #player-sum {
   position: absolute;
