@@ -1,6 +1,6 @@
 /*super black jack:
 
-regular black jack code and shit
+regular black jack code and whatnot
 there is a percent change of enemy dropping buffs:
 (increased chance of better cards (smaller cards) the closer it is to blackjack)
 (chance of revive)
@@ -17,7 +17,6 @@ must work on these sprites:
 
 */
 
-//fuck you, leave my code alone bitch
 
 // document.addEventListener("contextmenu", function(e){
 //     e.preventDefault();
@@ -184,10 +183,10 @@ function criticalHealthIncrease(amount = 10){
 
 
 function playerTakingDamage(){
-  //visual que for the player be taking damage type shit
+  //visual que for the player be taking damage 
 }
 function enemyTakingDamage(){
-  //visual que for the enemy taking damage type shitttt
+  //visual que for the enemy taking damage 
 }
 
 
@@ -405,7 +404,7 @@ function enemyPlayerDraw() {
 
 
   //const dupli_Card = document.getElementById('enemy-stack')
-  console.log("ENEMY HIT FUNCTION ACTIVATED BITCH");
+  console.log("ENEMY HIT FUNCTION ACTIVATED");
   //enemy player cards are all calculated at random
   //to avoid complete bullshit, call this function at the end of the hit function (enemy draws card from the same deck)
   let random_card_index;
@@ -474,7 +473,7 @@ function enemyPlayerDraw() {
   //whichever has the larger sum and is still less than 21 wins, and the opposite gets damage dealt.
   //once again, drawn cards, enemydrawncards, both div containers, must be cleared on each one of these outcomes.
   //displays the cards and the total(sum) of cards underneath them
-  //also computes the player state depending on shit
+  //also computes the player state
   //if the sum is less than 21, then keep it going
   //if sum is
 
@@ -557,7 +556,7 @@ function renderGame() {
     disableHitButton();
     setTimeout(()=>{
       enableHitButton();
-      console.log("ENABLED CAUSE OF HIT BTICH SHIT");
+      console.log("ENABLED CAUSE OF HIT");
     }, 500);
   }
     //might remove this line, as this can be satisfied by the stay() function
@@ -657,13 +656,13 @@ function stay() {
     console.log("drawing handle: " + drawinghandle);
     drawinghandler();
     drawinghandle = false;
-    console.log("bitch ass handler now ends!");
+    console.log("handler now ends!");
     //setTimeout(stay, 100); //timeout so that it waits for enemyDone to be true (after enemy is done drawing all their cards)
   }
   console.log("starting timeout on stay");
 
   setTimeout(()=> {
-    console.log("timeout setting starting whore");
+    console.log("timeout setting starting");
   if (21 > enemy_sum && enemy_sum > sum) {
     decreasePlayerHealth(damage);
     console.log("clear cards enemy wins")
@@ -747,7 +746,7 @@ function enemyDead(){
 //window.onload = function()---- this should start the game (super blackjack intro)
 //on start of game, play intro then display the two buttoms (after set wait time) to start game
 
-//to avoid the auto-start blockout, have a sprite of an snes cartridge being placed inside a snes console. click on the cartridge or console to start the whole shit
+//to avoid the auto-start blockout, have a sprite of an snes cartridge being placed inside a snes console. click on the cartridge or console to start the whole thing
 
 //mike tyson level - punch out wii theme
 
@@ -769,7 +768,7 @@ function enemyDead(){
 //once again, drawn cards, enemydrawncards, both div containers, must be cleared on each one of these outcomes.
 
 //displayEnemyCards only happens after the player selects stay, but also only after the enemy is done with its logic
-// within enemyplayerdraw, take note of the card. take note of the probability to pick another card. calculate that probability and determine it to a true or false if the enemy will draw another card, and within a globalized variable, do an if statement that if that value is true, then enemyplayerdraw is called. if not, then that shit is not called.
+// within enemyplayerdraw, take note of the card. take note of the probability to pick another card. calculate that probability and determine it to a true or false if the enemy will draw another card, and within a globalized variable, do an if statement that if that value is true, then enemyplayerdraw is called. if not, then that thing is not called.
 // change enemyplayerdraw to be called within rendergame instead of hit, that way they can function separately. each time render game is called, enemyplayerdraw is also called. this is where the if statements must be placed to see if the enemy will go again or not (when rendergame is called again)
 // have enemyplayerdraw have a true/false parameter. this function also returns a boolean. so in rendergame, pass the boolean through (automatically defaults to true, let this variable be global).
 // if enemy gets above 21 within this function (enemyplayerdraw), then the displaycards function is automatically called and enemy takes damage, then cards are cleared.
